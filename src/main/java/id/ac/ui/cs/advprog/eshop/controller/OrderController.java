@@ -27,8 +27,7 @@ public class OrderController {
     private PaymentService paymentService;
 
     @GetMapping("/create")
-    public String createOrderPage(Model model){
-        model.addAttribute("order", Order.builder().build());
+    public String createOrderPage(){
         return "createOrder";
     }
 

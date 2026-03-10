@@ -10,10 +10,10 @@
 <div class="container">
     <h3>Create New Order</h3>
 
-    <form th:action="@{/order/create}" th:object="${order}" method="post">
+    <form th:action="@{/order/create}" method="post">
         <div class="form-group">
             <label for="authorInput">Author</label>
-            <input th:field="*{author}" type="text" class="form-control mb-4 col-4" id="authorInput" placeholder="Enter author name">
+            <input type="text" class="form-control mb-4 col-4" id="authorInput" name="author" placeholder="Enter author name">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
