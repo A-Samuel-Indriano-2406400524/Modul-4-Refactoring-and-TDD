@@ -89,7 +89,7 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void testUpdateStatusInvalidStatus()    {
+    void testUpdateStatusInvalidStatus(){
         Order order = orders.get(1);
         doReturn(order).when(orderRepository).findById(order.getId());
 

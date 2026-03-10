@@ -128,4 +128,60 @@ public class PaymentServiceImplTest {
         assertEquals("payment-1", results.get(0).getId());
         assertEquals("payment-2", results.get(1).getId());
     }
+
+    @Test
+    void testAddPaymentWithValidVoucherCode() {
+        Order order = orders.get(0);
+        Payment payment = new Payment("payment-1", order,
+                "Voucher Code", "SUCCESS", paymentData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+
+        Payment result = paymentService.addPayment(order, "Voucher Code", paymentData);
+        assertEquals("SUCCESS", result.getStatus());
+        verify(paymentRepository, times(1)).save(any(Payment.class));
+    }
+
+    @Test
+    void testAddPaymentWithInvalidVoucherCode() {
+        Order order = orders.get(0);
+        Map<String, String> invalidPaymentData = new HashMap<>();
+        invalidPaymentData.put("voucherCode", "ESHOP123");
+        Payment payment = new Payment("payment-1", order,
+                "Voucher Code", "REJECTED", invalidPaymentData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+
+        Payment result = paymentService.addPayment(order, "Voucher Code", invalidPaymentData);
+        assertEquals("REJECTED", result.getStatus());
+        verify(paymentRepository, times(1)).save(any(Payment.class));
+    }
+
+    @Test
+    void testAddPaymentWithValidBankTransfer() {
+        Order order = orders.get(0);
+        Map<String, String> bankTransferData = new HashMap<>();
+        bankTransferData.put("bankName", "BCA");
+        bankTransferData.put("referenceCode", "INV-123456");
+        Payment payment = new Payment("payment-1", order,
+                "Bank Transfer", "SUCCESS", bankTransferData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+
+        Payment result = paymentService.addPayment(order, "Bank Transfer", bankTransferData);
+        assertEquals("SUCCESS", result.getStatus());
+        verify(paymentRepository, times(1)).save(any(Payment.class));
+    }
+
+    @Test
+    void testAddPaymentWithInvalidBankTransfer() {
+        Order order = orders.get(0);
+        Map<String, String> bankTransferData = new HashMap<>();
+        bankTransferData.put("bankName", "");
+        bankTransferData.put("referenceCode", "INV-123456");
+        Payment payment = new Payment("payment-1", order,
+                "Bank Transfer", "REJECTED", bankTransferData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+
+        Payment result = paymentService.addPayment(order, "Bank Transfer", bankTransferData);
+        assertEquals("REJECTED", result.getStatus());
+        verify(paymentRepository, times(1)).save(any(Payment.class));
+    }
 }

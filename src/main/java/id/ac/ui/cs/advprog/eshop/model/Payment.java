@@ -12,11 +12,19 @@ public class Payment {
     Map<String, String> paymentData;
 
     public Payment(String id, Order order, String method, String status,
-        Map<String, String> paymentData){
-            this.id = id;
-            this.order = order;
-            this.method = method;
+            Map<String, String> paymentData) {
+        this.id = id;
+        this.order = order;
+        this.method = method;
+        this.status = status;
+        this.paymentData = paymentData;
+    }
+
+    public void setStatus(String status) {
+        if (status.equals("PENDING") || status.equals("SUCCESS") || status.equals("REJECTED")) {
             this.status = status;
-            this.paymentData = paymentData;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }
