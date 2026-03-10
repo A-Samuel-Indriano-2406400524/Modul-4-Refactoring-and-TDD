@@ -1,6 +1,8 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    void testSaveCreate() {
+    void testSaveCreate(){
         Order order = orders.get(1);
         Order result = orderRepository.save(order);
 
@@ -106,8 +108,8 @@ public class OrderRepositoryTest {
     void testFindAllByAuthorIfAllLowercase(){
         orderRepository.save(orders.get(1));
         List<Order> orderList = orderRepository.findAllByAuthor(
-            orders.get(1).getAuthor().toLowerCase();
-        )
+            orders.get(1).getAuthor().toLowerCase()
+        );
         assertTrue(orderList.isEmpty());
     }
 }
