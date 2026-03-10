@@ -1,7 +1,9 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,5 +54,22 @@ public class PaymentTest {
         assertEquals("Voucher Code", payment.getMethod());
         assertEquals(OrderStatus.SUCCESS.getValue(), payment.getStatus());
         assertSame(this.paymentData, payment.getPaymentData());
+    }
+
+    @Test
+    void testSetStatusToPending() {
+        Payment payment = new Payment("payment-1", this.order,
+                "Voucher Code", "SUCCESS", this.paymentData);
+
+        assertDoesNotThrow(() -> payment.setStatus("PENDING"));
+        assertEquals("PENDING", payment.getStatus());
+    }
+
+    @Test
+    void testSetStatusInvalidStatus() {
+        Payment payment = new Payment("payment-1", this.order,
+                "Voucher Code", "SUCCESS", this.paymentData);
+
+        assertThrows(IllegalArgumentException.class, () -> payment.setStatus("FAILED"));
     }
 }

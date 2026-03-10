@@ -90,4 +90,18 @@ public class PaymentRepositoryTest {
         assertTrue(results.contains(payments.get(0)));
         assertTrue(results.contains(payments.get(1)));
     }
+
+    @Test
+    void testSaveUpdatePayment() {
+        Payment payment = payments.get(0);
+        paymentRepository.save(payment);
+
+        Payment updatedPayment = new Payment(payment.getId(), payment.getOrder(),
+                "Bank Transfer", "REJECTED", payment.getPaymentData());
+        Payment result = paymentRepository.save(updatedPayment);
+
+        assertEquals(payment.getId(), result.getId());
+        assertEquals("Bank Transfer", result.getMethod());
+        assertEquals("REJECTED", paymentRepository.findById(payment.getId()).getStatus());
+    }
 }

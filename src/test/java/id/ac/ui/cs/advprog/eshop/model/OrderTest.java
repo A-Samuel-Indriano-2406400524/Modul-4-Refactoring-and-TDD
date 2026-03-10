@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,5 +88,21 @@ public class OrderTest {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
                 this.products, 1708560000L, "Safira Sudrajat");
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("MEOW"));
+    }
+
+    @Test
+    void testOrderBuilder() {
+        Order.OrderBuilder builder = Order.builder()
+                .id("13652556-012a-4c07-b546-54eb1396d79b")
+                .products(this.products)
+                .orderTime(1708560000L)
+                .author("Safira Sudrajat")
+                .status(OrderStatus.SUCCESS.getValue());
+
+        Order order = builder.build();
+
+        assertEquals("13652556-012a-4c07-b546-54eb1396d79b", order.getId());
+        assertEquals(OrderStatus.SUCCESS.getValue(), order.getStatus());
+        assertTrue(builder.toString().contains("Order.OrderBuilder"));
     }
 }

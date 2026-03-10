@@ -61,6 +61,25 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindByIdOnSecondProduct() {
+        Product product1 = new Product();
+        product1.setProductId("id-1");
+        product1.setProductName("First");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId("id-2");
+        product2.setProductName("Second");
+        product2.setProductQuantity(20);
+        productRepository.create(product2);
+
+        Product found = productRepository.findById("id-2");
+        assertNotNull(found);
+        assertEquals("id-2", found.getProductId());
+    }
+
+    @Test
     void testUpdateProductSuccess() {
         Product product = new Product();
         product.setProductId("id-1");
