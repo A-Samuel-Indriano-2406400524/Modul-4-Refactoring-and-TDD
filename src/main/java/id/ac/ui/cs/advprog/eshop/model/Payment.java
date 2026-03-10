@@ -13,5 +13,10 @@ public class Payment {
 
     public Payment(String id, Order order, String method, String status,
         Map<String, String> paymentData){
+            this.id = id;
+            this.order = order;
+            this.method = method;
+            this.status = status;
+            this.paymentData = paymentData;
     }
 }
