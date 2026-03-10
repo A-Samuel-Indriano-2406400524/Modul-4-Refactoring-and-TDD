@@ -34,6 +34,6 @@ jobs:
         run: |
           ./gradlew test jacocoTestReport sonar \
             -Dsonar.organization=a-samuel-indriano-2406400524 \
-            -Dsonar.projectKey=A-Samuel-Indriano-2406400524_Modul-1-Coding-Standards \
+            -Dsonar.projectKey=A-Samuel-Indriano-2406400524_Modul-4-Refactoring-and-TDD \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml

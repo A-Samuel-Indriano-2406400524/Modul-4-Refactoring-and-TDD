@@ -96,6 +96,27 @@ class CarRepositoryTest {
     }
 
     @Test
+    void testFindByIdIfFoundOnSecondCar() {
+        Car car1 = new Car();
+        car1.setCarId("car-1");
+        car1.setCarName("BMW");
+        car1.setCarColor("Black");
+        car1.setCarQuantity(10);
+        carRepository.create(car1);
+
+        Car car2 = new Car();
+        car2.setCarId("car-2");
+        car2.setCarName("Audi");
+        car2.setCarColor("White");
+        car2.setCarQuantity(5);
+        carRepository.create(car2);
+
+        Car result = carRepository.findById("car-2");
+        assertNotNull(result);
+        assertEquals("car-2", result.getCarId());
+    }
+
+    @Test
     void testUpdateSuccess() {
         Car car = new Car();
         car.setCarId("car-1");
@@ -126,6 +147,32 @@ class CarRepositoryTest {
 
         Car result = carRepository.update("missing", updatedCar);
         assertNull(result);
+    }
+
+    @Test
+    void testUpdateSecondCarSuccess() {
+        Car car1 = new Car();
+        car1.setCarId("car-1");
+        car1.setCarName("BMW");
+        car1.setCarColor("Black");
+        car1.setCarQuantity(10);
+        carRepository.create(car1);
+
+        Car car2 = new Car();
+        car2.setCarId("car-2");
+        car2.setCarName("Audi");
+        car2.setCarColor("White");
+        car2.setCarQuantity(5);
+        carRepository.create(car2);
+
+        Car updatedCar = new Car();
+        updatedCar.setCarName("Updated");
+        updatedCar.setCarColor("Red");
+        updatedCar.setCarQuantity(20);
+
+        Car result = carRepository.update("car-2", updatedCar);
+        assertNotNull(result);
+        assertEquals("Updated", result.getCarName());
     }
 
     @Test

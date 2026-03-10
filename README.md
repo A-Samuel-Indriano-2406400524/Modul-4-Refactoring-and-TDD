@@ -1,6 +1,11 @@
 Deployment link: https://colonial-meryl-a-samuel-indriano-2406400524-72bb247d.koyeb.app/
 (Forgot to add the link here for module 02)
 
+Reflection 4 (Module 4)
+1. After finishing this tutorial, I felt that TDD workflow was useful for me because it forced me to analyze the expected behaviour before writing any new implementation / feature. By writing tests first for Order model, repo, and service, I could focus on one requirement at a time and get immediate feedback after each small change. This made it easier to find any mistakes earlier. But I also felt that sometimes I didn't understand the requirements fully before writing the test. This made me unsure about the expected value, so I spent more time just to adjust the tests and implementation. So next time I should spend more time identifying the inputs, outputs, happy paths, and unhappy paths fully from the start.
+
+2. Yeah, tests for Order have successfully followed the F.I.R.S.T principle. They implemented the Fast principle by using simple, short, and effective tests. They implemented the Independent principle by separating each behaviour into different test functions. They implemented the Repeatable principle because the tests use fixed inputs and can produce the same result every time they run. They implemented the Self-Validating principle because each test uses assertions to show whether the result is correct or not. Lastly, the tests also implemented the Timely principle because the tests were made before the implementation process (TDD workflow).
+
 Reflection 3 (Module 3)
 1. - I applied SRP by seperating CarController from ProductController and moving car ID generation logic from
 CarRepository to CarServiceImpl. This changes will make every class has single responsibility.
